@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog or Cat Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #counter {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Upload a Picture of a Dog or Cat</h1>
+    <input type="file" id="imageUpload" accept="image/jpeg">
+    <div id="counter">Total Detections: 0</div>
+    <button id="resetButton">Reset Counter</button>
+
+    <script>
+        let detectionCount = 0;
+
+        // Function to handle image upload and classification
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // Get the uploaded file
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Here you would use the Teachable Machine model to classify the image
+                    // For demonstration, let's assume we classify it as a dog or cat randomly
+                    const isDog = Math.random() < 0.5; // Simulate classification
+                    if (isDog) {
+                        detectionCount++;
+                        updateCounter();
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Update the counter display
+        function updateCounter() {
+            document.getElementById('counter').innerText = `Total Detections: ${detectionCount}`;
+            // Here you would also trigger a database update
+            // fetch('/update-database', { method: 'POST', body: JSON.stringify({ count: detectionCount }) });
+        }
+
+        // Reset the detection counter
+        document.getElementById('resetButton').addEventListener('click', function() {
+            detectionCount = 0;
+            updateCounter();
+            // Here you would also trigger a database reset
+            // fetch('/reset-database', { method: 'POST' });
+        });
+    </script>
+
+</body>
+</html>
