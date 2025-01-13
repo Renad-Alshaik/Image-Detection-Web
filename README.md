@@ -10,3 +10,8 @@ Detection Counter: The application maintains a counter that increments each time
 Display Counter: The total number of detections is displayed on the webpage.
 Reset Functionality: A button allows users to reset the detection counter back to zero.
 
+# Steps :
+* Train and Export the Model using Teachable Machine
+* Create the HTML File (index.html)
+* Create the JavaScript File (script.js)
+* Run and test the Web App
